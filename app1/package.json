@@ -1,0 +1,12 @@
+{
+  "name": "app1",
+  "version": "1.0.0",
+  "description": "Simple web example that writes user input into a file after pressing submit",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "\"Jin Fei Yang\"",
+  "license": "ISC"
+}

@@ -1,0 +1,1 @@
+Simple node.js example that writes user input into a file after pressing submit. Uses http and fs core modules.
