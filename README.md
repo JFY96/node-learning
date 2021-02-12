@@ -1,2 +1,2 @@
 # node-learning
- Code and notes following a Node JS Course
+ Applications and Code wrote following the Udemy course "NodeJS - The Complete Guide (MVC, REST APIs, GraphQL, Deno)" by Maximilian Schwarzmüller.
