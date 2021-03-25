@@ -1,5 +1,7 @@
 Webpage of a store of products, built using Node.js and the express framework.
 
+This application is an example that uses JSON to store the data. No databases are used.
+
 Technologies used:
 
 - Node.js

@@ -2,13 +2,15 @@ const path = require("path");
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const errorControllers = require("./controllers/errors");
+
 const rootDir = require('./utils/path');
 
 const app = express();
 
 app.set('view engine', 'ejs');
 
-const adminData = require('./routes/admin.js');
+const adminRoutes = require('./routes/admin.js');
 const shopRoutes = require('./routes/shop.js');
 
 // Parse the request body
@@ -24,13 +26,11 @@ app.use((req, res, next) => {
 });
 
 // router middlewares
-app.use('/admin', adminData.routes); // filter paths to /admin
+app.use('/admin', adminRoutes); // filter paths to /admin
 app.use(shopRoutes);
 
 // catch 404 errors
-app.use((req, res, next) => {
-    res.status(404).render('404', {title: 'Page Not Found'});
-});
+app.use(errorControllers.get404);
 
 // const server = http.createServer(app);
 // server.listen(3000);
