@@ -3,20 +3,20 @@ const MongoClient = mongodb.MongoClient;
 
 const config = require("../config.json");
 const uri = config.db_uri;
-
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 let _db;
 
 const mongoConnect = (callback) => {
-    MongoClient.connect(uri)
-        .then(client => {
+    client.connect(err => {
+        if (err) {
+            console.log(err);
+            throw err;
+        } else {
             console.log("MongoDB Client Connected");
             _db = client.db();
             callback(client);
-        })
-        .catch(err => {
-            console.log(err);
-            throw err;
-        });
+        }
+    });
 };
 
 const getDb = () => {
