@@ -1,6 +1,6 @@
 Webpage of a store of products, built using Node.js and the express framework.
 
-This application is built on top of app2 and uses Sequelize instead of simple JSON files to store data.
+This application is built on top of app_v1 and uses Sequelize instead of simple JSON files to store data.
 
 Technologies used:
 
