@@ -1,3 +1,6 @@
 {
-    "db_uri": ""
+    "db_uri": "",
+    "mail_service": "",
+    "mail_user": "",
+    "mail_password": ""
 }

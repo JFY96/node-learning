@@ -3,10 +3,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    name: {
+    name: String,
+    password: {
         type: String,
         required: true,
     },
+    resetToken: String,
+    resetTokenExpiration: Date,
     email: {
         type: String,
         required: true,
