@@ -1,11 +1,11 @@
 const path = require("path");
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
 const flash = require("connect-flash");
+const multer = require("multer");
 
 const errorControllers = require("./controllers/errors");
 const User = require("./models/user");
@@ -21,6 +21,23 @@ const store = new MongoDBStore({
 
 const csrfProtection = csrf();
 
+const fileStorage = multer.diskStorage({
+    destination: (req, file, callback) => {
+        callback(null, "images");
+    },
+    filename: (req, file, callback) => {
+        callback(null, new Date().toISOString() + "-" + file.originalname);
+    },
+});
+
+const fileFilter = (req, file, callback) => {
+    if (file.mimetype === "image/png" || file.mimetype === "image/jpg" || file.mimetype === "image/jpeg") {
+        callback(null, true);
+    } else {
+        callback(null, false);
+    }
+};
+
 app.set('view engine', 'ejs');
 
 const adminRoutes = require("./routes/admin.js");
@@ -28,10 +45,15 @@ const shopRoutes = require("./routes/shop");
 const authRoutes = require("./routes/auth");
 
 // Parse the request body
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: false}));
+
+// Parser for file upload
+app.use(multer({ storage: fileStorage, fileFilter }).single("image"));
 
 // Serve static files / register static folder path
 app.use(express.static(path.join(rootDir, 'public')));
+// Serve images folder
+app.use("/images", express.static(path.join(rootDir, 'iamges')));
 
 // use the session middleware
 app.use(
